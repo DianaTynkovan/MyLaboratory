@@ -34,13 +34,8 @@ class Student{
 	}
 }
 
-interface ModelLayer{
-	void setStudentattr(Student student);
-	Student getStudent();
-}
 
-class DBLayer implements ModelLayer{
-	@Override
+class DBLayer{
 	public void setStudentattr(Student student){
 		int age,course;
 		String name,hobbi;
@@ -59,26 +54,23 @@ class DBLayer implements ModelLayer{
 		student.setHobbi(hobbi);
 	}
 
-	@Override
+
 	public Student getStudent(){
 		return new Student();
 	}
 }
 
-interface View{
-	void showStudent(Student student);
-}
 
-class ConsoleView implements View{
-	@Override
+
+class ConsoleView{
 	public void showStudent(Student student){
 		System.out.println("Name of a studnet: |" + student.getName() + "\nAge:      	   |" + student.getAge() + "\nCourse:		   |" + student.getCourse() + "\nHobbi: 		   |" + student.getHobbi());
 	}
 }
 
 class Controller{
-	ModelLayer modelLayer = new DBLayer();
-	View view = new ConsoleView();
+	DBLayer modelLayer = new DBLayer();
+	ConsoleView  view = new ConsoleView();
 	void execute(){
 		Student student = modelLayer.getStudent();
 		modelLayer.setStudentattr(student);
